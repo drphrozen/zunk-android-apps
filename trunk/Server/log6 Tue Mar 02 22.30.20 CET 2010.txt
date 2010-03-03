@@ -1,6 +1,0 @@
-Start time: Tue Mar 02 22:30:20 CET 2010
-End time: Tue Mar 02 22:30:20 CET 2010
-Messages: 35
-Min. interval: 1 ms.
-Max. interval: 12 ms.
-Message per second: 2916
