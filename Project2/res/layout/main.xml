@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+	<Button android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:text="@string/exercise1"
+		android:id="@+id/exercise1"></Button>
+	
+	
+	<Button android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:text="@string/exercise2"
+		android:id="@+id/exercise2"></Button>
+	<EditText android:id="@+id/EditText01" android:layout_height="wrap_content" android:singleLine="true" android:layout_width="fill_parent" android:text="misc.dyndns.dk:40071"></EditText><View android:layout_width="fill_parent" android:layout_height="10dip"></View>
+	<Button android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/quit"
+		android:text="Quit"></Button>
+
+
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ClientLogger!</string>
+    <string name="app_name">Project2</string>
+<string name="exercise1">Exercise 1</string>
+<string name="exercise2">Exercise 2</string>
+</resources>
