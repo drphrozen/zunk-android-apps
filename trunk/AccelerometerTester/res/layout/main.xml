@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+<Button android:id="@+id/Button01" android:layout_height="wrap_content" android:text="Start" android:layout_width="fill_parent"></Button><TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/hello" android:id="@+id/TextView01"/>
+
+
+
+
+<ProgressBar android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/x" android:max="1000"></ProgressBar>
+<ProgressBar android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/y" android:max="1000"></ProgressBar>
+<ProgressBar android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/z" android:max="1000"></ProgressBar>
+</LinearLayout>
