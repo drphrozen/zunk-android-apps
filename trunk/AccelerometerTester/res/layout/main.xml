@@ -10,7 +10,7 @@
 
 
 
-<ProgressBar android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/x" android:max="1000"></ProgressBar>
-<ProgressBar android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/y" android:max="1000"></ProgressBar>
-<ProgressBar android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/z" android:max="1000"></ProgressBar>
+
+
+
 </LinearLayout>
