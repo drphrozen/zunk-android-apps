@@ -41,14 +41,12 @@ int ads7870_init(void) {
 
 	printk(KERN_DEBUG "ads7870_init\n");
 
-	if ((err
-			= ads7870_spi_init(&ads7870_spi_device, &omap3devkit8000_spi_board_info[0]))
-			< 0)
+	err = ads7870_spi_init(&ads7870_spi_device, &omap3devkit8000_spi_board_info[0]);
+	if (err < 0)
 		return err;
 
 	// Configure ADS7870
-	err
-			= ads7870_spi_write_reg8(ads7870_spi_device, ADS7870_REFOSC, ADS7870_REFOSC_OSCR
+	err	= ads7870_spi_write_reg8(ads7870_spi_device, ADS7870_REFOSC, ADS7870_REFOSC_OSCR
 					| ADS7870_REFOSC_OSCE | ADS7870_REFOSC_REFE | ADS7870_REFOSC_BUFE
 					| ADS7870_REFOSC_R2V);
 

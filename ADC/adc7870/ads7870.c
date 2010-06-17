@@ -47,7 +47,7 @@ static int __init ads7870_cdrv_init(void) {
 	device_create(ads7870_cls, NULL, MKDEV(ADS7870_MAJOR, 0), NULL, "adc0");
 	device_create(ads7870_cls, NULL, MKDEV(ADS7870_MAJOR, 1), NULL, "adc1");
 
-	printk("ads7870 driver initialized\n");
+	printk(KERN_DEBUG "ads7870 driver initialized\n");
 
 	return ads7870_init();
 }

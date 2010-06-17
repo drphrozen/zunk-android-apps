@@ -185,11 +185,17 @@ int ads7870_spi_init(struct spi_device **ads7870_spi_device,
    * assigned yet.
    */ 
   bus_num = ads7870_spi_board_info->bus_num;
-  ads7870_spi_master = spi_busnum_to_master(bus_num);
-  *ads7870_spi_device = spi_new_device(ads7870_spi_master,
-				      ads7870_spi_board_info);
 
-  if((err=spi_register_driver(&ads7870_spi_driver))<0)
+  printk(KERN_DEBUG "spi_busnum_to_master(%d)\n", bus_num);
+  ads7870_spi_master = spi_busnum_to_master(bus_num);
+
+  printk(KERN_DEBUG "spi_new_device(ads7870_spi_master={bus_num=%d, num_chipselect=%d})\n", ads7870_spi_master->bus_num, ads7870_spi_master->num_chipselect);
+  *ads7870_spi_device = spi_new_device(ads7870_spi_master, ads7870_spi_board_info);
+
+  printk(KERN_DEBUG "spi_register_driver({name=%s, mod_name=%s})", ads7870_spi_driver.driver.name, ads7870_spi_driver.driver.mod_name);
+  err = spi_register_driver(&ads7870_spi_driver);
+
+  if(err < 0)
     printk (KERN_ALERT "Error %d registering the ads7870 SPI driver\n", err);
 
   return err;
