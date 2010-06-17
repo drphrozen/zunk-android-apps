@@ -29,7 +29,7 @@ struct file_operations ads7870_fops = {
 static int __init ads7870_cdrv_init(void) {
 	int err = 0;
 
-	printk("ads7870 driver initializing\n");
+	printk(KERN_DEBUG "ads7870_cdrv_init\n");
 
 	if (register_chrdev(ADS7870_MAJOR, "adconverter", &ads7870_fops)) {
 		printk(KERN_ERR "ADS7870: unable to get major %d\n", ADS7870_MAJOR);
@@ -53,7 +53,8 @@ static int __init ads7870_cdrv_init(void) {
 }
 
 static void __exit ads7870_cdrv_exit(void) {
-	printk("ads7870 driver Exit\n");
+	printk(KERN_DEBUG "ads7870_cdrv_exit\n");
+
 	printk(KERN_ERR "ADS7870: exit returned %d\n", ads7870_exit());
 
 	device_destroy(ads7870_cls, MKDEV(ADS7870_MAJOR, 0));
@@ -64,7 +65,7 @@ static void __exit ads7870_cdrv_exit(void) {
 int ads7870_cdrv_open(struct inode *inode, struct file *filep) {
 	int major, minor;
 
-	printk("ads7870 driver Open\n");
+	printk(KERN_DEBUG "ads7870_cdrv_open\n");
 
 	major = MAJOR(inode->i_rdev);
 	minor = MINOR(inode->i_rdev);
@@ -85,7 +86,7 @@ int ads7870_cdrv_open(struct inode *inode, struct file *filep) {
 int ads7870_cdrv_release(struct inode *inode, struct file *filep) {
 	int minor, major;
 
-	printk("ads7870 driver Release\n");
+	printk(KERN_DEBUG "ads7870_cdrv_release\n");
 
 	major = MAJOR(inode->i_rdev);
 	minor = MINOR(inode->i_rdev);
@@ -104,7 +105,7 @@ ssize_t ads7870_cdrv_write(struct file *filep, const char __user *ubuf, size_t c
 	int minor, len, value;
 	char kbuf[MAXLEN];
 
-	printk(KERN_ALERT "ads7870 Write\n");
+	printk(KERN_DEBUG "ads7870_cdrv_write\n");
 
 	minor = MINOR(filep->f_dentry->d_inode->i_rdev);
 	if (minor != ADS7870_MINOR) {
@@ -137,16 +138,16 @@ ssize_t ads7870_cdrv_read(struct file *filep, char __user *ubuf, size_t count, l
 //	char resultBuf[5];
 	u16 result;
 
-	printk(KERN_ALERT "ads7870 Read\n");
+	printk(KERN_DEBUG "ads7870_cdrv_read\n");
 
 	minor = MINOR(filep->f_dentry->d_inode->i_rdev);
 	if (minor > NBR_ADC_CH - 1) {
-		printk(KERN_ALERT "ads7870 read from wrong Minor No:%i \n", minor);
+		printk(KERN_ALERT "ads7870 Read from wrong Minor No:%i \n", minor);
 		return 0;
 	}
 	if (MODULE_DEBUG)
 		printk(KERN_ALERT "Reading from ads7870 [Minor] %i \n", minor);
-	printk(KERN_ALERT "ads7870 Read\n");
+	printk(KERN_ALERT "ads7870 Convert\n");
 
 	/*
 	 * Start Conversion

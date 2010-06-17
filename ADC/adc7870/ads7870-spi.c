@@ -16,6 +16,8 @@ u16 ads7870_spi_read_reg8(struct spi_device *spi, u16 reg)
 	struct spi_message m;
 	u16 data = 0, cmd;
 
+	printk(KERN_DEBUG "ads7870_spi_read_reg8\n");
+
 	cmd = (reg & 0x1f) | (1<<6); // Mask R/Wn 16/8n
 
 	memset(t, 0, sizeof(t));
@@ -45,6 +47,8 @@ u16 ads7870_spi_read_reg16(struct spi_device *spi, u16 reg)
 	struct spi_transfer t[2];
 	struct spi_message m;
 	u16 data = 0, cmd;
+
+	printk(KERN_DEBUG "ads7870_spi_read_reg16\n");
 
 	cmd = (reg & 0x1f) | (1<<6) | (1<<5); // Mask R/Wn 16/8n
 
@@ -79,6 +83,8 @@ void ads7870_spi_write_reg8(struct spi_device *spi, u16 reg, u16 val)
   struct spi_message m;
   u8 data[2];
   u16 valA, regA;
+
+  printk(KERN_DEBUG "ads7870_spi_write_reg8\n");
 
   valA = val & 0xff;
   regA = reg & 0x1f;
@@ -122,6 +128,7 @@ void ads7870_spi_write_reg8(struct spi_device *spi, u16 reg, u16 val)
  */
 static int __devinit ads7870_spi_probe(struct spi_device *spi)
 {
+	printk(KERN_DEBUG "ads7870_spi_probe\n");
 
   spi->bits_per_word = 8;  
   spi_setup(spi);
@@ -134,6 +141,8 @@ static int __devinit ads7870_spi_probe(struct spi_device *spi)
 
 static int __devexit ads7870_remove(struct spi_device *spi)
 {
+	printk(KERN_DEBUG "ads7870_remove\n");
+
   return 0;
 }
 
@@ -162,6 +171,8 @@ int ads7870_spi_init(struct spi_device **ads7870_spi_device,
   int err, bus_num;
   struct spi_master *ads7870_spi_master;
 
+  printk(KERN_DEBUG "ads7870_spi_init\n");
+
   /* Add the ads7870 device to the SPI bus *
    *
    * Using this method we actually add a device 
@@ -186,6 +197,8 @@ int ads7870_spi_init(struct spi_device **ads7870_spi_device,
 
 int ads7870_spi_exit(struct spi_device *spi)
 {
+	printk(KERN_DEBUG "ads7870_spi_exit\n");
+
   /*
    * Un-register spi driver and device
    * Spi host calls _remove upon this

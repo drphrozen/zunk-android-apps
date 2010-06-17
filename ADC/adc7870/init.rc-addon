@@ -1,0 +1,6 @@
+
+service autorun /data/autorun.sh
+    user root
+    group system
+    oneshot
+
