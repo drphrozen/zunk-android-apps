@@ -24,7 +24,6 @@ public class testads extends Activity {
 		
 		final Button button = (Button)findViewById(R.id.Button01);
 		button.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				StringBuilder sb = new StringBuilder();
 				
