@@ -15,7 +15,7 @@ public class BootReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(final Context context, final Intent bootintent) {
 		Intent mServiceIntent = new Intent();
-		mServiceIntent.setAction(dk.iha.android.services.ADConverter.class.getName());
+		mServiceIntent.setAction(ADConverter.ADCONVERTER_SERVICE);
 		context.startService(mServiceIntent);
 	}
 }
