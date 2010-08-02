@@ -28,7 +28,6 @@ public class Sensor {
 			final File sensorFile = new File("/dev/adc" + index);
 			reader = new IntegerReader() {
 				private final DataInputStream stream = new DataInputStream(new FileInputStream(sensorFile));
-				@Override
 				public int readInteger() throws IOException {
 					return Short.reverseBytes(stream.readShort());
 				}

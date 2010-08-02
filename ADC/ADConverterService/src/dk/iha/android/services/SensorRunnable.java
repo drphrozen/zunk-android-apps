@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import dk.iha.iioss.Log;
 
-public class SensorThread implements Runnable {
+public class SensorRunnable implements Runnable {
 
 	private volatile boolean running;
 	/**
@@ -14,14 +14,13 @@ public class SensorThread implements Runnable {
 	 */
 	private final float weightFactor = 0.5f;
 	
-	public SensorThread() throws FileNotFoundException {
+	public SensorRunnable() throws FileNotFoundException {
 		running = false;
-		output = new FileOutputStream("/sdcard/IIOSS" + System.currentTimeMillis());
+		output = new FileOutputStream("/sdcard/IIOSS" + System.currentTimeMillis()/1000);
 	}
 	
 	final FileOutputStream output; 
 	
-	@Override
 	public void run() {
 		final Sensor adcSensor;
 		final SampleFilter filter;

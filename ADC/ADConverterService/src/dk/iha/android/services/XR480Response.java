@@ -1,5 +1,6 @@
 package dk.iha.android.services;
 
+
 public class XR480Response {
 	public final Long timestamp;
 	public final String raw;

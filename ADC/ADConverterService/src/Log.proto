@@ -1,4 +1,5 @@
 package dk.iha.iioss;
+option java_package = "dk.iha.iioss";
 
 message Entry {
 	required sint64 timestamp = 1;
