@@ -1,8 +1,0 @@
-package dk.iha.iioss;
-option java_package = "dk.iha.iioss";
-
-message Entry {
-	required sint64 timestamp = 1;
-	optional string rfid = 2;
-	optional float weight = 3;
-}
