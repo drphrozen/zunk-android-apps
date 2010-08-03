@@ -14,8 +14,7 @@ import android.content.Intent;
 public class BootReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(final Context context, final Intent bootintent) {
-		Intent mServiceIntent = new Intent();
-		mServiceIntent.setAction(ADConverter.ADCONVERTER_SERVICE);
+		Intent mServiceIntent = new Intent(context, ADConverter.class);
 		context.startService(mServiceIntent);
 	}
 }
