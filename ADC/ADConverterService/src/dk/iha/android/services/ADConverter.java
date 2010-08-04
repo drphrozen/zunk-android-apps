@@ -30,16 +30,35 @@ public class ADConverter extends Service implements Handler.Callback {
 		super.onCreate();
 
 		handler = new Handler(this);
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		if(runnable == null || runnable.isRunning() == false) {
+			try {
+				runnable = new SensorRunnable(this);
+				thread = new Thread(runnable);
+				thread.start();
+			} catch (FileNotFoundException e) {
+				StatusNotifier.error(this, SENSOR_ERROR_EXCEPTION,
+						"IIOSS Pig Logger", "SDCARD not found!");
+				e.printStackTrace();
+			}		
+		}
 		
+		return super.onStartCommand(intent, flags, startId);
+	}
+	
+	@Override
+	public void onDestroy() {
+		runnable.stop();
 		try {
-			runnable = new SensorRunnable();
-			thread = new Thread(runnable);
-			thread.start();
-		} catch (FileNotFoundException e) {
-			StatusNotifier.error(this, SENSOR_ERROR_EXCEPTION,
-					"IIOSS Pig Logger", "SDCARD not found!");
+			thread.join(3000);
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		runnable = null;
+		super.onDestroy();
 	}
 
 	@Override
@@ -57,7 +76,7 @@ public class ADConverter extends Service implements Handler.Callback {
 			StatusNotifier.info(this, SENSOR_RUNNING, "IIOSS Pig Logger",
 					"IIOSS Pig Logger is running.");
 			break;
-		case SENSOR_INFO: 
+		case SENSOR_INFO:
 			StatusNotifier.info(this, SENSOR_RUNNING, "IIOSS Pig Logger",
 					(CharSequence)msg.obj);
 			break;

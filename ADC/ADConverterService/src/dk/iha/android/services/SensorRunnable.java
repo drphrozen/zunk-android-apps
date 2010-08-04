@@ -26,13 +26,15 @@ public class SensorRunnable implements Runnable {
 	final FileOutputStream output;
 
 	public void run() {
+		if(true) ;
 		final Sensor adcSensor;
 		final SampleFilter filter;
 		try {
 			adcSensor = new Sensor(Sensor.ADC_PROVIDER, 0);
 			filter = new SampleFilter(2, 10);
+			running = true;
+			adConverter.sendMessage(ADConverter.SENSOR_RUNNING);
 			while (running) {
-				adConverter.sendMessage(ADConverter.SENSOR_RUNNING);
 				try {
 					int value = adcSensor.readInteger();
 					if (filter.put(value) == false || value <= 2)
@@ -50,12 +52,15 @@ public class SensorRunnable implements Runnable {
 		
 	}
 
-	private void handleWeightTrigger(int value) {
-		Log.Entry.newBuilder().setTimestamp(System.currentTimeMillis()).setWeight(value * weightFactor);
+	private void handleWeightTrigger(int value) throws IOException {
+		Log.Entry.newBuilder()
+			.setTimestamp(System.currentTimeMillis())
+			.setWeight(value * weightFactor)
+		.build().writeDelimitedTo(output);
 	}
 
 	private void checkRFID() {
-
+		
 	}
 	
 	public void stop() {
