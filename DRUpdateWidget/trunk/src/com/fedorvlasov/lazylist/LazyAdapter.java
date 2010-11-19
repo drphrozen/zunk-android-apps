@@ -68,7 +68,7 @@ public class LazyAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setAction(android.content.Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(entry.getMedia()));
+				intent.setData(Uri.parse(entry.getMedia().toString()));
 				activity.startActivity(intent);
 			}
 		});

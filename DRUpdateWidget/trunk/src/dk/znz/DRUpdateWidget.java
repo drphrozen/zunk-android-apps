@@ -42,11 +42,7 @@ public class DRUpdateWidget extends Activity {
 			@Override
 			protected NewsEntry[] doInBackground(Void... params) {
 				try {
-					return DRUpdate.getNewsEntries(new ProgressInfo() {
-						public void progressChanged(long progress) {
-							publishProgress((float)progress);
-						}
-					});
+					return DRUpdate.getNewsEntries();
 				} catch (Exception e) {
 					ex = e;
 					return new NewsEntry[0];
