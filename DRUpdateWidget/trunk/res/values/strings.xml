@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, DRUpdateWidget!</string>
+    
     <string name="app_name">DR Update Widget</string>
+<string name="updating">Opdatere nyheder...</string>
 </resources>

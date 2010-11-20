@@ -2,20 +2,20 @@ package dk.znz;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fedorvlasov.lazylist.LazyAdapter;
 
 public class DRUpdateWidget extends Activity {
-	private ListView mListView;
+	private ListView mList;
+	private TextView mUpdating;
 	private LazyAdapter mLazyAdapter;
 	private NewsEntry[] mNewsEntries;
 
@@ -24,19 +24,18 @@ public class DRUpdateWidget extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		mListView = (ListView) findViewById(R.id.list);
-
-		Button b = (Button) findViewById(R.id.button1);
-		b.setOnClickListener(listener);
+		mList = (ListView) findViewById(R.id.list);
+		mUpdating = (TextView) findViewById(R.id.updating);
 
 		new AsyncTask<Void, Float, NewsEntry[]>() {
 
 			private volatile Exception ex = null;
-			private ProgressDialog progressDialog;
+//			private ProgressDialog progressDialog;
 			
 			@Override
 			protected void onPreExecute() {
-				progressDialog = ProgressDialog.show(DRUpdateWidget.this, "Indlæser nyheder", "Vent venligst..", true);
+				mUpdating.setVisibility(View.VISIBLE);
+//				progressDialog = ProgressDialog.show(DRUpdateWidget.this, "Indlæser nyheder", "Vent venligst..", true);
 			};
 			
 			@Override
@@ -51,15 +50,16 @@ public class DRUpdateWidget extends Activity {
 
 			@Override
 			protected void onProgressUpdate(Float... values) {
-				progressDialog.setMessage(String.format("Vent venligst.. %03.1f KiB", values[0]/1024));
+//				progressDialog.setMessage(String.format("Vent venligst.. %03.1f KiB", values[0]/1024));
 			};
 			
 			@Override
 			protected void onPostExecute(NewsEntry[] result) {
-				progressDialog.dismiss();
+				mUpdating.setVisibility(View.GONE);
+//				progressDialog.dismiss();
 				mNewsEntries = result;
 				mLazyAdapter = new LazyAdapter(DRUpdateWidget.this, mNewsEntries);
-				mListView.setAdapter(mLazyAdapter);
+				mList.setAdapter(mLazyAdapter);
 				if(ex != null) {
 					Log.e(DRUpdateWidget.class.getName(), ex.getClass().getName() + ": " + ex.getMessage());
 					AlertDialog.Builder builder = new AlertDialog.Builder(DRUpdateWidget.this);
@@ -81,11 +81,11 @@ public class DRUpdateWidget extends Activity {
 	public void onDestroy() {
 		if (mLazyAdapter != null)
 			mLazyAdapter.imageLoader.stopThread();
-		mListView.setAdapter(null);
+		mList.setAdapter(null);
 		super.onDestroy();
 	}
 
-	public OnClickListener listener = new OnClickListener() {
+	public OnClickListener onCacheClearClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			if(mLazyAdapter == null) return;
 			mLazyAdapter.imageLoader.clearCache();
