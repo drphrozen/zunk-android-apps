@@ -1,4 +1,4 @@
-package dk.znz;
+package dk.znz.drupdate;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fedorvlasov.lazylist.LazyAdapter;
+
+import dk.znz.R;
 
 public class DRUpdateWidget extends Activity {
 	private ListView mList;

@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 import dk.znz.R;
+import dk.znz.drupdate.DRUpdateWidget;
 
 public class ImageLoader {
 
@@ -32,7 +33,7 @@ public class ImageLoader {
 
     // Find the dir to save cached images
     if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-      cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "LazyList");
+      cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "/Android/data/" + DRUpdateWidget.class.getPackage().getName() + "/cache/");
     else
       cacheDir = context.getCacheDir();
     if (!cacheDir.exists())

@@ -1,4 +1,4 @@
-package dk.znz;
+package dk.znz.drupdate;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;

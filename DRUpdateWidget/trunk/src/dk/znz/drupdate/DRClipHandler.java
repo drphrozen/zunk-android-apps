@@ -1,4 +1,4 @@
-package dk.znz;
+package dk.znz.drupdate;
 
 import java.net.URI;
 import java.text.ParseException;

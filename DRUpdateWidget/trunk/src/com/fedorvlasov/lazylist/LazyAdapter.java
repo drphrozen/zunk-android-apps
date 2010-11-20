@@ -11,8 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import dk.znz.NewsEntry;
 import dk.znz.R;
+import dk.znz.drupdate.NewsEntry;
 
 public class LazyAdapter extends BaseAdapter {
 
