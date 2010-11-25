@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -15,8 +16,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
-import dk.znz.R;
 import dk.znz.drupdate.DRUpdateWidget;
+import dk.znz.drupdate.R;
 
 public class ImageLoader {
 
@@ -122,11 +123,11 @@ public class ImageLoader {
 
   // Task for the queue
   private class PhotoToLoad {
-    public URI       url;
+    public URI       uri;
     public ImageView imageView;
 
     public PhotoToLoad(URI u, ImageView i) {
-      url = u;
+      uri = u;
       imageView = i;
     }
   }
@@ -166,9 +167,15 @@ public class ImageLoader {
             synchronized (photosQueue.photosToLoad) {
               photoToLoad = photosQueue.photosToLoad.pop();
             }
-            Bitmap bmp = getBitmap(photoToLoad.url);
-            cache.put(photoToLoad.url, bmp);
-            if (photoToLoad.imageView.getTag().equals(photoToLoad.url)) {
+            Bitmap bmp = getBitmap(photoToLoad.uri);
+            cache.put(photoToLoad.uri, bmp);
+            URI uri = null;
+            try {
+              uri = new URI(photoToLoad.imageView.getTag().toString());
+            } catch (URISyntaxException e) {
+              e.printStackTrace();
+            }
+            if (uri != null && uri.equals(photoToLoad.uri)) {
               BitmapDisplayer bd = new BitmapDisplayer(bmp, photoToLoad.imageView);
               Activity a = (Activity) photoToLoad.imageView.getContext();
               a.runOnUiThread(bd);

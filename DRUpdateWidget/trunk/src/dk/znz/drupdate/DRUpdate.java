@@ -16,20 +16,9 @@ import org.xml.sax.SAXException;
 final class DRUpdate {
   private static final URI uri = URI.create("http://znz.dk/znk/drupdate.php");
 
-  public static NewsEntry[] getNewsEntries() throws MalformedURLException, IOException, SAXException, ParserConfigurationException {
+  public static NewsClip[] getNewsEntries() throws MalformedURLException, IOException, SAXException, ParserConfigurationException {
     ArrayList<DRClip> clips = new DRClipParser().parse();
-    NewsEntry[] out = new NewsEntry[clips.size()];
-    int i = 0;
-    for (DRClip clip : clips) {
-      out[i] = new NewsEntry();
-      out[i].setDescription(clip.getDescription());
-      out[i].setImage(clip.getImage());
-      out[i].setMedia(clip.getMvsUrl());
-      out[i].setName(clip.getTitle());
-      i++;
-    }
-
-    return out;
+    return clips.toArray(new DRClip[0]);
   }
 
   public static String getJSON() throws MalformedURLException, IOException {

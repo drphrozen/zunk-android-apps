@@ -13,13 +13,11 @@ import android.widget.TextView;
 
 import com.fedorvlasov.lazylist.LazyAdapter;
 
-import dk.znz.R;
-
 public class DRUpdateWidget extends Activity {
 	private ListView mList;
 	private TextView mUpdating;
 	private LazyAdapter mLazyAdapter;
-	private NewsEntry[] mNewsEntries;
+	private NewsClip[] mNewsEntries;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,7 @@ public class DRUpdateWidget extends Activity {
 		mList = (ListView) findViewById(R.id.list);
 		mUpdating = (TextView) findViewById(R.id.updating);
 
-		new AsyncTask<Void, Float, NewsEntry[]>() {
+		new AsyncTask<Void, Float, NewsClip[]>() {
 
 			private volatile Exception ex = null;
 //			private ProgressDialog progressDialog;
@@ -41,12 +39,12 @@ public class DRUpdateWidget extends Activity {
 			};
 			
 			@Override
-			protected NewsEntry[] doInBackground(Void... params) {
+			protected NewsClip[] doInBackground(Void... params) {
 				try {
 					return DRUpdate.getNewsEntries();
 				} catch (Exception e) {
 					ex = e;
-					return new NewsEntry[0];
+					return new NewsClip[0];
 				}
 			}
 
@@ -56,7 +54,7 @@ public class DRUpdateWidget extends Activity {
 			};
 			
 			@Override
-			protected void onPostExecute(NewsEntry[] result) {
+			protected void onPostExecute(NewsClip[] result) {
 				mUpdating.setVisibility(View.GONE);
 //				progressDialog.dismiss();
 				mNewsEntries = result;

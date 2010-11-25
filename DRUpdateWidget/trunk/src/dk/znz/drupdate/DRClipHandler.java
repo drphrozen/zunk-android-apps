@@ -1,6 +1,5 @@
 package dk.znz.drupdate;
 
-import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,12 +14,15 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class DRClipHandler extends DefaultHandler {
 
-  private final ArrayList<DRClip>           mArrayList              = new ArrayList<DRClip>(30);
+  // private static final String DR_ROOT = "http://dr.dk/";
+
+  private final ArrayList<DRClip>           mArrayList        = new ArrayList<DRClip>(30);
   private DRClip                            mDRClip;
 
   private final Map<String, PropertySetter> mPropertySetters;
   private final SimpleDateFormat            mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-  private String                            mActiveElement;
+  private final StringBuilder               mStringBuilder    = new StringBuilder(50);
+  private PropertySetter                    mPropertySetter   = null;
 
   public DRClipHandler() {
     HashMap<String, PropertySetter> map = new HashMap<String, PropertySetter>(6);
@@ -31,17 +33,17 @@ public class DRClipHandler extends DefaultHandler {
     });
     map.put("mvsUrl", new PropertySetter() {
       public void setProperty(String content, DRClip drClip) {
-        drClip.setMvsUrl(URI.create(content));
+        drClip.setVideoLocation(content);
       }
     });
     map.put("image", new PropertySetter() {
       public void setProperty(String content, DRClip drClip) {
-        drClip.setImage(URI.create(content));
+        drClip.setImageLocation(content);
       }
     });
     map.put("pubDate", new PropertySetter() {
       public void setProperty(String content, DRClip drClip) throws ParseException {
-        drClip.setPubDate(mSimpleDateFormat.parse(content));
+        drClip.setPublished(mSimpleDateFormat.parse(content));
       }
     });
     map.put("rssDate", new PropertySetter() {
@@ -65,15 +67,26 @@ public class DRClipHandler extends DefaultHandler {
 
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-    mActiveElement = qName;
+    mPropertySetter = mPropertySetters.get(qName);
     if (qName.equals("clip")) {
       mDRClip = new DRClip();
       String tmp = attributes.getValue("qid").trim();
       mDRClip.setQid(UUID.fromString(tmp.substring(1, tmp.length() - 1)));
     }
   }
+
   @Override
   public void endElement(String uri, String localName, String qName) throws SAXException {
+    try {
+      if (mPropertySetter != null) {
+        mPropertySetter.setProperty(mStringBuilder.toString(), mDRClip);
+        mStringBuilder.setLength(0);
+      }
+    } catch (Exception e) {
+      throw new SAXException(e);
+    }
+    
+    mPropertySetter = null;
     if (qName.equals("clip")) {
       mArrayList.add(mDRClip);
     }
@@ -81,17 +94,10 @@ public class DRClipHandler extends DefaultHandler {
 
   @Override
   public void characters(char[] ch, int start, int length) throws SAXException {
-    PropertySetter propertySetter = mPropertySetters.get(mActiveElement);
-    if (propertySetter == null)
+    if (mPropertySetter == null)
       return;
-    String content = new String(ch, start, length).trim();
-    if(content.equals(""))
-      return;
-    try {
-      propertySetter.setProperty(content, mDRClip);
-    } catch (Exception e) {
-      throw new SAXException(e);
-    }
+    String content = new String(ch, start, length);
+    mStringBuilder.append(content);
   }
 
   public ArrayList<DRClip> getList() {
