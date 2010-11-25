@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.fedorvlasov.lazylist.LazyAdapter;
 
-public class DRUpdateWidget extends Activity {
+public class DRUpdateActivity extends Activity {
 	private ListView mList;
 	private TextView mUpdating;
 	private LazyAdapter mLazyAdapter;
@@ -58,17 +58,17 @@ public class DRUpdateWidget extends Activity {
 				mUpdating.setVisibility(View.GONE);
 //				progressDialog.dismiss();
 				mNewsEntries = result;
-				mLazyAdapter = new LazyAdapter(DRUpdateWidget.this, mNewsEntries);
+				mLazyAdapter = new LazyAdapter(DRUpdateActivity.this, mNewsEntries);
 				mList.setAdapter(mLazyAdapter);
 				if(ex != null) {
-					Log.e(DRUpdateWidget.class.getName(), ex.getClass().getName() + ": " + ex.getMessage());
-					AlertDialog.Builder builder = new AlertDialog.Builder(DRUpdateWidget.this);
+					Log.e(DRUpdateActivity.class.getName(), ex.getClass().getName() + ": " + ex.getMessage());
+					AlertDialog.Builder builder = new AlertDialog.Builder(DRUpdateActivity.this);
 					builder.setTitle("En fejl opstod, lukker!")
 					       .setCancelable(false)
 					       .setMessage(ex.getMessage())
 					       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					           public void onClick(DialogInterface dialog, int id) {
-					        	   DRUpdateWidget.this.finish();
+					        	   DRUpdateActivity.this.finish();
 					           }
 					       });
 					builder.create().show();
