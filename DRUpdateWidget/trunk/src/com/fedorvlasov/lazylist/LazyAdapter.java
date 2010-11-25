@@ -16,10 +16,10 @@ import dk.znz.drupdate.R;
 
 public class LazyAdapter extends BaseAdapter {
 
-  private Activity              activity;
-  private NewsClip[]            data;
-  private static LayoutInflater inflater = null;
-  public ImageLoader            imageLoader;
+  private Activity       activity;
+  private NewsClip[]     data;
+  private LayoutInflater inflater = null;
+  public ImageLoader     imageLoader;
 
   public LazyAdapter(Activity a, NewsClip[] ne) {
     activity = a;
@@ -69,7 +69,7 @@ public class LazyAdapter extends BaseAdapter {
     } catch (URISyntaxException e) {
       e.printStackTrace();
     }
-    imageLoader.DisplayImage(uri, activity, holder.image);
+    imageLoader.displayImage(uri, activity, holder.image);
     vi.setOnClickListener(new OnNewsClipClicked(activity, entry));
     return vi;
   }

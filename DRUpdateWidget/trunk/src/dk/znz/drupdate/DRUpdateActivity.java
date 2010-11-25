@@ -88,7 +88,7 @@ public class DRUpdateActivity extends Activity {
     super.onDestroy();
   }
 
-  public OnClickListener onCacheClearClickListener = new OnClickListener() {
+  public final OnClickListener onCacheClearClickListener = new OnClickListener() {
                                                      public void onClick(View v) {
                                                        if (mLazyAdapter == null)
                                                          return;

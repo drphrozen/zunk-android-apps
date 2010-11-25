@@ -37,13 +37,14 @@ public class ImageLoader {
       cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "/Android/data/" + DRUpdateActivity.class.getPackage().getName() + "/cache/");
     else
       cacheDir = context.getCacheDir();
+    // TODO: What if the directory could not be created?
     if (!cacheDir.exists())
       cacheDir.mkdirs();
   }
 
-  final int stub_id = R.drawable.stub;
+  static final int stub_id = R.drawable.stub;
 
-  public void DisplayImage(URI imageUri, Activity activity, ImageView imageView) {
+  public void displayImage(URI imageUri, Activity activity, ImageView imageView) {
     if (cache.containsKey(imageUri))
       imageView.setImageBitmap(cache.get(imageUri));
     else {
@@ -82,7 +83,7 @@ public class ImageLoader {
       Bitmap bitmap = null;
       InputStream is = uri.toURL().openStream();
       OutputStream os = new FileOutputStream(f);
-      Utils.CopyStream(is, os);
+      Utils.copyStream(is, os);
       os.close();
       bitmap = decodeFile(f);
       return bitmap;
@@ -122,7 +123,7 @@ public class ImageLoader {
   }
 
   // Task for the queue
-  private class PhotoToLoad {
+  static private class PhotoToLoad {
     public URI       uri;
     public ImageView imageView;
 
@@ -139,7 +140,7 @@ public class ImageLoader {
   }
 
   // stores list of photos to download
-  class PhotosQueue {
+  static class PhotosQueue {
     private Stack<PhotoToLoad> photosToLoad = new Stack<PhotoToLoad>();
 
     // removes all instances of this ImageView
@@ -158,9 +159,9 @@ public class ImageLoader {
       try {
         while (true) {
           // thread waits until there are any images to load in the queue
-          if (photosQueue.photosToLoad.size() == 0)
             synchronized (photosQueue.photosToLoad) {
-              photosQueue.photosToLoad.wait();
+              while(photosQueue.photosToLoad.size() == 0)
+                photosQueue.photosToLoad.wait();
             }
           if (photosQueue.photosToLoad.size() != 0) {
             PhotoToLoad photoToLoad;
@@ -193,7 +194,7 @@ public class ImageLoader {
   PhotosLoader photoLoaderThread = new PhotosLoader();
 
   // Used to display bitmap in the UI thread
-  class BitmapDisplayer implements Runnable {
+  static class BitmapDisplayer implements Runnable {
     Bitmap    bitmap;
     ImageView imageView;
 
