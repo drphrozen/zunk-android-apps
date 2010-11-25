@@ -67,6 +67,9 @@ public class DRClipHandler extends DefaultHandler {
 
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    // TODO: Why does localName exist only in 1.6, while qName only exists in 2.2.1
+    if(qName.equals(""))
+      qName = localName;
     mPropertySetter = mPropertySetters.get(qName);
     if (qName.equals("clip")) {
       mDRClip = new DRClip();
@@ -77,6 +80,8 @@ public class DRClipHandler extends DefaultHandler {
 
   @Override
   public void endElement(String uri, String localName, String qName) throws SAXException {
+    if(qName.equals(""))
+      qName = localName;
     try {
       if (mPropertySetter != null) {
         mPropertySetter.setProperty(mStringBuilder.toString(), mDRClip);
