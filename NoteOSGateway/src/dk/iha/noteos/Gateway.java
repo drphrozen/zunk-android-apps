@@ -17,11 +17,11 @@ public class Gateway extends ListActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    SensorAdapter adapter = new SensorAdapter(this);
+    final SensorAdapter adapter = new SensorAdapter(this);
     setListAdapter(adapter);
 
-    adapter.add(new TemperatureSensor(adapter, this));
-    adapter.add(new TemperatureSensor(adapter, this));
+    adapter.add(new TemperatureSensor());
+    adapter.add(new TemperatureSensor());
 
     ListView lv = getListView();
     lv.setTextFilterEnabled(true);
