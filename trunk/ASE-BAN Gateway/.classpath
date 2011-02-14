@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="lib" path="lib/guice-2.0-no_aop.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ASE-BAN Gateway/lib/guice-2.0-javadoc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/roboguice-1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ASE-BAN Gateway/lib/roboguice-1.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
