@@ -14,7 +14,6 @@ public class HomeButton {
   public HomeButton(View view) {
     mView = view;
     mButton = (Button)view.findViewById(R.id.home_button);
-    Resources resources = mView.getContext().getResources();
     mFrameLayout = (FrameLayout)view.findViewById(R.id.home_button_frame);
   }
   
@@ -22,15 +21,19 @@ public class HomeButton {
     Resources resources = mView.getContext().getResources();
     switch(s) {
     case Error:
+      mButton.setBackgroundDrawable(resources.getDrawable(R.drawable.button_red));
       mFrameLayout.setForeground(resources.getDrawable(R.drawable.icon_error));
       break;
     case Info:
+      mButton.setBackgroundDrawable(resources.getDrawable(R.drawable.button_green));
       mFrameLayout.setForeground(resources.getDrawable(R.drawable.icon_information));
       break;
     case Normal:
+      mButton.setBackgroundDrawable(resources.getDrawable(R.drawable.button_green));
       mFrameLayout.setForeground(null);
       break;
     case Warning:
+      mButton.setBackgroundDrawable(resources.getDrawable(R.drawable.button_yellow));
       mFrameLayout.setForeground(resources.getDrawable(R.drawable.icon_warning));      
       break;
     }
