@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/home_button_frame"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:foreground="@drawable/icon_error"
@@ -11,9 +12,15 @@
 	android:paddingBottom="0dp">
 	<RelativeLayout
 		android:layout_height="fill_parent"
-		android:id="@+id/relativeLayout1"
-		android:layout_width="fill_parent">
+		android:layout_width="fill_parent"
+		android:padding="0dp">
 		<Button
-			android:text="Button" android:background="@drawable/soft_button" android:id="@+id/button" android:layout_height="120dp" android:layout_centerInParent="true" android:layout_width="120dp" android:padding="0dp"></Button>
+			android:id="@+id/home_button"
+			android:text="Button"
+			android:background="@drawable/button"
+			android:layout_height="fill_parent"
+			android:layout_width="fill_parent"
+			android:layout_centerInParent="true"
+			android:padding="0dp" />
 	</RelativeLayout>
 </FrameLayout>
