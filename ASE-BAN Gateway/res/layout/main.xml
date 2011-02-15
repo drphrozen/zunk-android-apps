@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridView
+<com.tomgibara.android.util.SquareGridLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/gridview"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:columnWidth="150dp"
-	android:numColumns="auto_fit"
-	android:verticalSpacing="10dp"
-	android:horizontalSpacing="10dp"
-	android:stretchMode="columnWidth"
-	android:gravity="center" />
+	xmlns:util="http://schemas.android.com/apk/res/dk.iha.opencare"
+	util:size="3">
+	<home_button
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	</home_button>
+	<home_button
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	</home_button>
+	<home_button
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	</home_button>
+	<home_button
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	</home_button>
+	<home_button
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	</home_button>
+	<home_button
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	</home_button>
+</com.tomgibara.android.util.SquareGridLayout>
