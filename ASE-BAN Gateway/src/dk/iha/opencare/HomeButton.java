@@ -14,6 +14,7 @@ public class HomeButton {
   public HomeButton(View view) {
     mView = view;
     mButton = (Button)view.findViewById(R.id.home_button);
+    Resources resources = mView.getContext().getResources();
     mFrameLayout = (FrameLayout)view.findViewById(R.id.home_button_frame);
   }
   

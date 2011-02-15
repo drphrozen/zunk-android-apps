@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- pressed -->
+	<item
+		android:state_pressed="true">
+		<layer-list>
+			<item
+				android:drawable="@drawable/button_highlight" />
+			<item
+				android:drawable="@drawable/bitmap_red" />
+		</layer-list>
+	</item>
+	<!-- focused -->
+	<item
+		android:state_focused="true">
+		<layer-list>
+			<item
+				android:drawable="@drawable/button_highlight" />
+			<item
+				android:drawable="@drawable/bitmap_red" />
+		</layer-list>
+	</item>
+	<!-- default -->
+	<item android:drawable="@drawable/bitmap_red">
+	</item>
+</selector>
