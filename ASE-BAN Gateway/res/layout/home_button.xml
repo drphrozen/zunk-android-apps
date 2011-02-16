@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/home_button_frame"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
+	android:layout_height="wrap_content"
 	android:foreground="@drawable/icon_error"
 	android:foregroundGravity="top|right"
 	android:paddingLeft="0dp"
@@ -11,16 +11,17 @@
 	android:paddingRight="10dp"
 	android:paddingBottom="0dp">
 	<RelativeLayout
-		android:layout_height="fill_parent"
+		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
 		android:padding="0dp">
-		<Button
+		<dk.iha.opencare.SquareImageButton
 			android:id="@+id/home_button"
 			android:text="Button"
 			android:background="@drawable/button_green"
-			android:layout_height="fill_parent"
 			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
 			android:layout_centerInParent="true"
+			android:scaleType="centerCrop"
 			android:padding="0dp" />
 	</RelativeLayout>
 </FrameLayout>
