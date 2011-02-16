@@ -1,25 +1,43 @@
 package dk.iha.opencare;
 
 import android.content.res.Resources;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 public class HomeButton {
 
-  private final Button mButton;
-  private final FrameLayout mFrameLayout;
-  private final View mView;
+  private final OnClickListener mOnClickListener;
+  private ImageButton mButton;
+  private FrameLayout mFrameLayout;
+  private View mView;
+  private Status mStatus;
   
-  public HomeButton(View view) {
+  public HomeButton(OnClickListener listener) {
+    mOnClickListener = listener;
+  }
+  
+  public void setView(View view) {
+    if(mView == view) return;
     mView = view;
-    mButton = (Button)view.findViewById(R.id.home_button);
+    mButton = (ImageButton)view.findViewById(R.id.home_button);
+    mButton.setOnClickListener(mOnClickListener);
     mFrameLayout = (FrameLayout)view.findViewById(R.id.home_button_frame);
   }
   
   public void setStatus(Status s) {
+    mStatus = s;
+  }
+  
+  public static View createView(LayoutInflater inflater) {
+    return inflater.inflate(R.layout.home_button, null);
+  }
+  
+  public void updateView() {
     Resources resources = mView.getContext().getResources();
-    switch(s) {
+    switch(mStatus) {
     case Error:
       mButton.setBackgroundDrawable(resources.getDrawable(R.drawable.button_red));
       mFrameLayout.setForeground(resources.getDrawable(R.drawable.icon_error));
@@ -39,7 +57,7 @@ public class HomeButton {
     }
   }
   
-  public Button getButton() {
+  public ImageButton getButton() {
     return mButton;
   }
   
@@ -53,5 +71,4 @@ public class HomeButton {
     Warning,
     Error
   }
-
 }
