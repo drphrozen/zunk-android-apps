@@ -9,14 +9,6 @@ package dk.iha.opencare;
 
 public final class R {
     public static final class attr {
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int size=0x7f010000;
     }
     public static final class drawable {
         public static final int bitmap_green=0x7f020000;
@@ -45,33 +37,4 @@ containing a value of this type.
         public static final int app_name=0x7f040001;
         public static final int hello=0x7f040000;
     }
-    public static final class styleable {
-        /** Attributes that can be used with a SquareGridLayout.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SquareGridLayout_size dk.iha.opencare:size}</code></td><td></td></tr>
-           </table>
-           @see #SquareGridLayout_size
-         */
-        public static final int[] SquareGridLayout = {
-            0x7f010000
-        };
-        /**
-          <p>This symbol is the offset where the {@link dk.iha.opencare.R.attr#size}
-          attribute's value can be found in the {@link #SquareGridLayout} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:size
-        */
-        public static final int SquareGridLayout_size = 0;
-    };
 }
