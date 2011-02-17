@@ -1,8 +1,11 @@
 package dk.iha.opencare;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import roboguice.activity.RoboActivity;
+import roboguice.event.Observes;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,5 +46,9 @@ public class Home extends RoboActivity {
       homeButton.setStatus(s);
       mHomeButtons.add(homeButton);      
     }
+  }
+  
+  public void onStatusChanged(@Observes StatusChangedEvent event) {
+    
   }
 }
