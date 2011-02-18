@@ -76,32 +76,17 @@ public class SensorChannelTest {
           byte[] tmp = new byte[2];
           int length = inputStream.read(tmp);
           assertEquals(2, length);
-          assertEquals(compareArrays(tmp, bytes), -1);
+          assertEquals(Utils.compareArrays(tmp, bytes), -1);
 
           tmp = new byte[] { 2 };
           byte[] tmp2 = new byte[1];
           length = inputStream.read(tmp2, 0, 1);
           assertEquals(1, length);
-          assertEquals(compareArrays(tmp, tmp2), -1);
-
+          assertEquals(Utils.compareArrays(tmp, tmp2), -1);
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
       }
     });
-  }
-  /**
-   * 
-   * @param first
-   * @param second
-   * @return -1 on success, -2 if length differs, otherwise the index that failed
-   */
-  private static int compareArrays(byte[] first, byte[] second) {
-    if(first.length != second.length) return -2;
-    for (int i = 0; i < first.length; i++) {
-      if(first[i] != second[i])
-        return i;
-    }
-    return -1;
   }
 }
