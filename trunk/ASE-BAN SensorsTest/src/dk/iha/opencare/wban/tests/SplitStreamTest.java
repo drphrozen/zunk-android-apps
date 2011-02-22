@@ -1,7 +1,5 @@
 package dk.iha.opencare.wban.tests;
 
-import static org.junit.Assert.*;
-
 import java.io.ByteArrayOutputStream;
 
 import org.junit.After;
